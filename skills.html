@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KASIDIT — ความสามารถ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg-dark: #0B0C10;
+  --card-bg: rgba(22, 24, 30, 0.8);
+  --card-border: rgba(243, 169, 83, 0.2);
+  --gold-glow: #F3A953;
+  --amber-accent: #E2C044;
+  --accent-gradient: linear-gradient(135deg, #F3A953 0%, #E2C044 100%);
+  --accent-glow-shadow: rgba(243, 169, 83, 0.25);
+  --text-main: #F8F9FA;
+  --text-muted: #A0A5B1;
+  --text-dim: #6C727F;
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-dark);
+  background-image:
+    radial-gradient(at 0% 0%, rgba(243, 169, 83, 0.08) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(226, 192, 68, 0.05) 0px, transparent 50%);
+  color: var(--text-main);
+  font-family: 'Prompt', 'Plus Jakarta Sans', sans-serif;
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* --- HEADER HERO SECTION --- */
+header {
+  padding: 50px 24px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInContent 0.8s ease-out 0.2s forwards;
+}
+
+.hero-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: var(--radius-lg);
+  padding: 36px 40px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(243, 169, 83, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--accent-gradient);
+}
+
+.photo-frame {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.photo-frame img.avatar {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(243, 169, 83, 0.5);
+  box-shadow: 0 0 25px var(--accent-glow-shadow);
+}
+
+.school-badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 2px solid var(--bg-dark);
+  object-fit: contain;
+  padding: 2px;
+}
+
+.hero-info {
+  flex-grow: 1;
+}
+
+.badge-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: rgba(243, 169, 83, 0.1);
+  border: 1px solid rgba(243, 169, 83, 0.3);
+  color: var(--gold-glow);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.badge-tag::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold-glow);
+  box-shadow: 0 0 8px var(--gold-glow);
+}
+
+.hero-info h1 {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  margin-bottom: 4px;
+}
+
+.hero-info p {
+  color: var(--text-muted);
+  font-size: 15px;
+  font-weight: 400;
+}
+
+/* --- STICKY NAV TABS (now real links) --- */
+.nav-wrapper {
+  position: sticky;
+  top: 20px;
+  z-index: 100;
+  max-width: 900px;
+  margin: 0 auto 30px;
+  padding: 0 24px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInContent 0.8s ease-out 0.4s forwards;
+}
+
+nav.tabs {
+  background: rgba(18, 20, 26, 0.9);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 50px;
+  padding: 6px;
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+nav.tabs::-webkit-scrollbar { display: none; }
+
+nav.tabs a {
+  appearance: none;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 30px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  display: inline-block;
+}
+
+nav.tabs a:hover {
+  color: var(--text-main);
+}
+
+nav.tabs a.active {
+  background: var(--accent-gradient);
+  color: #0B0C10;
+  font-weight: 700;
+  box-shadow: 0 4px 15px var(--accent-glow-shadow);
+}
+
+/* --- MAIN CONTENT PANELS --- */
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px 60px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInContent 0.8s ease-out 0.5s forwards;
+}
+
+.panel {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: var(--radius-lg);
+  padding: 36px 40px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+.section-header {
+  margin-bottom: 24px;
+}
+
+.section-header h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-header h2::before {
+  content: '';
+  width: 4px;
+  height: 20px;
+  background: var(--accent-gradient);
+  border-radius: 4px;
+  box-shadow: 0 0 10px var(--gold-glow);
+}
+
+/* Profile Grid */
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.info-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--card-border);
+  padding: 18px 20px;
+  border-radius: var(--radius-md);
+}
+
+.info-box .label {
+  font-size: 11.5px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.info-box .value {
+  font-size: 15.5px;
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+/* Education List */
+.edu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.edu-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.edu-card:hover {
+  transform: translateX(6px);
+  border-color: rgba(243, 169, 83, 0.5);
+}
+
+.edu-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 8px;
+}
+
+.edu-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.edu-details h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin-bottom: 2px;
+}
+
+.edu-details p {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* Feature Lists (Activities / Skills) */
+.feature-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.feature-list li {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--card-border);
+  padding: 16px 20px;
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.feature-list li::before {
+  content: '✓';
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(243, 169, 83, 0.15);
+  color: var(--gold-glow);
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px rgba(243, 169, 83, 0.2);
+}
+
+/* Honor Grid */
+.honor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.honor-card {
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.honor-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--gold-glow);
+  box-shadow: 0 12px 30px rgba(243, 169, 83, 0.15);
+}
+
+.honor-thumb {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  background: #000;
+}
+
+.honor-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.honor-title {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-main);
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.honor-year {
+  font-size: 12px;
+  color: var(--gold-glow);
+  font-weight: 600;
+}
+
+.honor-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  border: 2px dashed var(--card-border);
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+}
+
+/* Contact Stack */
+.contact-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.contact-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--card-border);
+  padding: 18px 24px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.contact-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(243, 169, 83, 0.5);
+}
+
+.contact-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.contact-type {
+  font-size: 11.5px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.contact-value {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+.contact-arrow {
+  color: var(--gold-glow);
+  font-size: 18px;
+}
+
+/* Back Button */
+.back-wrap {
+  text-align: center;
+  margin-top: 36px;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent-gradient);
+  color: #0B0C10;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 14px 32px;
+  border-radius: 30px;
+  box-shadow: 0 8px 25px var(--accent-glow-shadow);
+  transition: all 0.25s ease;
+}
+
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px var(--accent-glow-shadow);
+}
+
+footer {
+  text-align: center;
+  padding: 30px 20px;
+  color: var(--text-dim);
+  font-size: 12.5px;
+  border-top: 1px solid var(--card-border);
+}
+
+/* --- ANIMATIONS --- */
+@keyframes fadeInContent {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal-item {
+  opacity: 0;
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.curtain {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-dark);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  z-index: 999;
+  pointer-events: none;
+}
+
+.curtain.active {
+  transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+  transform: scaleY(1);
+}
+
+@media (max-width: 768px) {
+  .hero-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px 20px;
+    gap: 20px;
+  }
+
+  .photo-frame img.avatar {
+    width: 110px;
+    height: 110px;
+  }
+
+  .panel {
+    padding: 28px 20px;
+  }
+
+  .feature-list {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="curtain" id="curtain"></div>
+
+<header>
+  <div class="hero-card">
+    <div class="photo-frame">
+      <img class="avatar" src="hero.png" alt="กษิดิศ">
+      <img class="school-badge" src="school-logo.png" alt="ตราโรงเรียน">
+    </div>
+    <div class="hero-info">
+      <span class="badge-tag">Student Portfolio</span>
+      <h1>กษิดิศ (Kasidit)</h1>
+      <p>โรงเรียนบ้านบึง "อุตสาหกรรมนุเคราะห์"</p>
+    </div>
+  </div>
+</header>
+
+<div class="nav-wrapper">
+  <nav class="tabs">
+      <a href="portfolio.html">คำนำ</a>
+      <a href="profile.html">ประวัติส่วนตัว</a>
+      <a href="education.html">ประวัติการศึกษา</a>
+      <a href="activities.html">กิจกรรม</a>
+      <a href="skills.html" class="active">ความสามารถ</a>
+      <a href="honors.html">เกียรติบัตร</a>
+      <a href="contact.html">ติดต่อ</a>
+  </nav>
+</div>
+
+<main>
+
+  <section class="panel" id="skills">
+    <div class="section-header">
+      <h2>ความสามารถพิเศษ & ทักษะ</h2>
+    </div>
+    <ul class="feature-list">
+      <li>เรียนรู้กีฬาชนิดต่างๆได้ไว</li>
+      <li>เล่นบาสเก่ง</li>
+      <li>การปั่นจักรยานระยะทางไกล (Cycling)</li>
+      <li>เเก้ปัญหาเฉพาะหน้าได้ดี</li>
+    </ul>
+  </section>
+
+  <div class="back-wrap">
+    <a href="portfolio.html" class="cta-btn">
+      <span>←</span>
+      <span>กลับหน้าแรก</span>
+    </a>
+  </div>
+
+</main>
+
+<footer>
+  © 2026 Kasidit — Official Portfolio. All Rights Reserved.
+</footer>
+
+<script>
+// Reveal animation for content inside the current panel
+function revealPanel(panel) {
+  if (!panel) return;
+  const items = panel.querySelectorAll('.section-header, p, .info-box, .edu-card, .feature-list li, .honor-card, .contact-card');
+  items.forEach((el, i) => {
+    el.classList.remove('reveal-item');
+    void el.offsetWidth;
+    el.style.animationDelay = (i * 40) + 'ms';
+    el.classList.add('reveal-item');
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  revealPanel(document.querySelector('.panel'));
+
+  // Curtain page-transition effect for every internal .html link
+  const curtain = document.getElementById('curtain');
+  if (curtain) {
+    document.querySelectorAll('a[href$=".html"]').forEach(link => {
+      link.addEventListener('click', function (e) {
+        const href = link.getAttribute('href');
+        if (!href) return;
+        e.preventDefault();
+        curtain.classList.add('active');
+        setTimeout(() => {
+          window.location.href = href;
+        }, 500);
+      });
+    });
+  }
+});
+</script>
+
+</body>
+</html>
