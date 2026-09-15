@@ -247,124 +247,6 @@ main {
   box-shadow: 0 0 10px var(--gold-glow);
 }
 
-/* Profile Grid */
-.profile-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 16px;
-}
-
-.info-box {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--card-border);
-  padding: 18px 20px;
-  border-radius: var(--radius-md);
-}
-
-.info-box .label {
-  font-size: 11.5px;
-  color: var(--text-dim);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 4px;
-  display: block;
-}
-
-.info-box .value {
-  font-size: 15.5px;
-  font-weight: 500;
-  color: var(--text-main);
-}
-
-/* Education List */
-.edu-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.edu-card {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius-md);
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-.edu-card:hover {
-  transform: translateX(6px);
-  border-color: rgba(243, 169, 83, 0.5);
-}
-
-.edu-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.05);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  padding: 8px;
-}
-
-.edu-icon img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.edu-details h3 {
-  font-size: 16px;
-  font-weight: 600;
-  color: #FFFFFF;
-  margin-bottom: 2px;
-}
-
-.edu-details p {
-  font-size: 14px;
-  color: var(--text-muted);
-}
-
-/* Feature Lists (Activities / Skills) */
-.feature-list {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 14px;
-}
-
-.feature-list li {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--card-border);
-  padding: 16px 20px;
-  border-radius: var(--radius-md);
-  font-size: 15px;
-  color: var(--text-main);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.feature-list li::before {
-  content: '✓';
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: rgba(243, 169, 83, 0.15);
-  color: var(--gold-glow);
-  font-size: 12px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  box-shadow: 0 0 8px rgba(243, 169, 83, 0.2);
-}
-
 /* Honor Grid */
 .honor-grid {
   display: grid;
@@ -381,6 +263,7 @@ main {
   display: flex;
   flex-direction: column;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .honor-card:hover {
@@ -427,52 +310,87 @@ main {
   color: var(--text-muted);
 }
 
-/* Contact Stack */
-.contact-stack {
+/* --- Lightbox (image viewer with X close) --- */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 7, 10, 0.92);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 40px 20px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.lightbox-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: min(90vw, 900px);
+  max-height: 85vh;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  align-items: center;
+  transform: scale(0.95);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.contact-card {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--card-border);
-  padding: 18px 24px;
+.lightbox-overlay.active .lightbox-content {
+  transform: scale(1);
+}
+
+.lightbox-content img {
+  max-width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
   border-radius: var(--radius-md);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+}
+
+.lightbox-caption {
+  margin-top: 16px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -18px;
+  right: -18px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent-gradient);
+  color: #0B0C10;
+  border: none;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  text-decoration: none;
-  transition: all 0.2s ease;
+  justify-content: center;
+  box-shadow: 0 8px 20px var(--accent-glow-shadow);
+  transition: transform 0.2s ease;
 }
 
-.contact-card:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(243, 169, 83, 0.5);
+.lightbox-close:hover {
+  transform: rotate(90deg) scale(1.05);
 }
 
-.contact-left {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.contact-type {
-  font-size: 11.5px;
-  color: var(--text-dim);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.contact-value {
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--text-main);
-}
-
-.contact-arrow {
-  color: var(--gold-glow);
-  font-size: 18px;
+@media (max-width: 600px) {
+  .lightbox-close {
+    top: -46px;
+    right: 0;
+  }
 }
 
 /* Back Button */
@@ -564,10 +482,6 @@ footer {
   .panel {
     padding: 28px 20px;
   }
-
-  .feature-list {
-    grid-template-columns: 1fr;
-  }
 }
 </style>
 </head>
@@ -624,6 +538,16 @@ footer {
   © 2026 Kasidit — Official Portfolio. All Rights Reserved.
 </footer>
 
+<!-- Lightbox: clicking a certificate opens the image here; click the X or the dark
+     background, or press Esc, to close it. -->
+<div class="lightbox-overlay" id="lightbox">
+  <div class="lightbox-content">
+    <button class="lightbox-close" id="lightbox-close" aria-label="ปิด">✕</button>
+    <img id="lightbox-img" src="" alt="">
+    <p class="lightbox-caption" id="lightbox-caption"></p>
+  </div>
+</div>
+
 <script>
 // Reveal animation for content inside the current panel
 function revealPanel(panel) {
@@ -671,8 +595,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (honors.length === 0) {
     honorGrid.innerHTML = '<div class="honor-empty">ยังไม่มีข้อมูลเกียรติบัตร</div>';
   } else {
-    honorGrid.innerHTML = honors.map(h => `
-      <a class="honor-card" href="${h.img}" target="_blank" rel="noopener">
+    honorGrid.innerHTML = honors.map((h, i) => `
+      <a class="honor-card" href="${h.img}" data-index="${i}">
         <img class="honor-thumb" src="${h.img}" alt="${h.title}" onerror="this.src='https://via.placeholder.com/300x225/16181e/f3a953?text=Certificate'">
         <div class="honor-body">
           <p class="honor-title">${h.title}</p>
@@ -685,6 +609,47 @@ document.addEventListener('DOMContentLoaded', () => {
       revealPanel(document.getElementById('honors'));
     }
   }
+
+  // --- Lightbox logic: click a card to open the image full-size,
+  // close it with the X button, by clicking the dark overlay, or with Esc ---
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const lightboxClose = document.getElementById('lightbox-close');
+
+  function openLightbox(index) {
+    const h = honors[index];
+    if (!h) return;
+    lightboxImg.src = h.img;
+    lightboxImg.alt = h.title;
+    lightboxCaption.textContent = h.year ? `${h.title} · พ.ศ. ${h.year}` : h.title;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+    lightboxImg.src = '';
+  }
+
+  honorGrid.addEventListener('click', (e) => {
+    const card = e.target.closest('.honor-card');
+    if (!card) return;
+    e.preventDefault();
+    openLightbox(Number(card.dataset.index));
+  });
+
+  lightboxClose.addEventListener('click', closeLightbox);
+
+  // Click on the dark backdrop (not the image/content itself) closes it
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
+  });
 </script>
 </body>
 </html>
