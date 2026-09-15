@@ -148,7 +148,7 @@ header {
   font-weight: 400;
 }
 
-/* --- STICKY NAV TABS (now real links) --- */
+/* --- STICKY NAV TABS --- */
 .nav-wrapper {
   position: sticky;
   top: 20px;
@@ -247,110 +247,62 @@ main {
   box-shadow: 0 0 10px var(--gold-glow);
 }
 
-/* Profile Grid */
-.profile-grid {
+/* --- Activity Cards (image + text) --- */
+.activity-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
 }
 
-.info-box {
-  background: rgba(255, 255, 255, 0.03);
+.activity-card {
+  background: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--card-border);
-  padding: 18px 20px;
   border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.info-box .label {
-  font-size: 11.5px;
-  color: var(--text-dim);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 4px;
+.activity-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--gold-glow);
+  box-shadow: 0 12px 30px rgba(243, 169, 83, 0.15);
+}
+
+/* Image slot: to add a picture for any activity, put the file next to this
+   html file and set the src below, e.g. src="activity-basketball.jpg" */
+.activity-thumb-wrap {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: rgba(255, 255, 255, 0.03);
+  overflow: hidden;
+}
+
+.activity-thumb-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   display: block;
 }
 
-.info-box .value {
-  font-size: 15.5px;
-  font-weight: 500;
-  color: var(--text-main);
-}
-
-/* Education List */
-.edu-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.edu-card {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius-md);
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-.edu-card:hover {
-  transform: translateX(6px);
-  border-color: rgba(243, 169, 83, 0.5);
-}
-
-.edu-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.05);
+/* Placeholder shown when an activity has no photo yet */
+.activity-thumb-wrap.empty {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-  padding: 8px;
+  color: var(--text-dim);
+  font-size: 13px;
 }
 
-.edu-icon img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.edu-details h3 {
-  font-size: 16px;
-  font-weight: 600;
-  color: #FFFFFF;
-  margin-bottom: 2px;
-}
-
-.edu-details p {
-  font-size: 14px;
-  color: var(--text-muted);
-}
-
-/* Feature Lists (Activities / Skills) */
-.feature-list {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 14px;
-}
-
-.feature-list li {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--card-border);
-  padding: 16px 20px;
-  border-radius: var(--radius-md);
-  font-size: 15px;
-  color: var(--text-main);
+.activity-body {
+  padding: 18px 20px;
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.feature-list li::before {
-  content: '✓';
+.activity-body .check {
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -365,114 +317,10 @@ main {
   box-shadow: 0 0 8px rgba(243, 169, 83, 0.2);
 }
 
-/* Honor Grid */
-.honor-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 20px;
-}
-
-.honor-card {
-  text-decoration: none;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: all 0.3s ease;
-}
-
-.honor-card:hover {
-  transform: translateY(-6px);
-  border-color: var(--gold-glow);
-  box-shadow: 0 12px 30px rgba(243, 169, 83, 0.15);
-}
-
-.honor-thumb {
-  width: 100%;
-  aspect-ratio: 4/3;
-  object-fit: cover;
-  background: #000;
-}
-
-.honor-body {
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  justify-content: space-between;
-}
-
-.honor-title {
-  font-size: 13.5px;
-  font-weight: 500;
-  color: var(--text-main);
-  margin-bottom: 8px;
-  line-height: 1.5;
-}
-
-.honor-year {
-  font-size: 12px;
-  color: var(--gold-glow);
-  font-weight: 600;
-}
-
-.honor-empty {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 60px 20px;
-  border: 2px dashed var(--card-border);
-  border-radius: var(--radius-md);
-  color: var(--text-muted);
-}
-
-/* Contact Stack */
-.contact-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.contact-card {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--card-border);
-  padding: 18px 24px;
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.contact-card:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(243, 169, 83, 0.5);
-}
-
-.contact-left {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.contact-type {
-  font-size: 11.5px;
-  color: var(--text-dim);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.contact-value {
+.activity-body span.label {
   font-size: 15px;
-  font-weight: 500;
   color: var(--text-main);
-}
-
-.contact-arrow {
-  color: var(--gold-glow);
-  font-size: 18px;
+  line-height: 1.5;
 }
 
 /* Back Button */
@@ -564,10 +412,6 @@ footer {
   .panel {
     padding: 28px 20px;
   }
-
-  .feature-list {
-    grid-template-columns: 1fr;
-  }
 }
 </style>
 </head>
@@ -608,12 +452,46 @@ footer {
     <div class="section-header">
       <h2>กิจกรรมที่เข้าร่วม</h2>
     </div>
-    <ul class="feature-list">
-      <li>ปั่นจักรยานออกกำลังกายและกระชับมิตรภาพ</li>
-      <li>เข้าร่วมการเเข่งขันบาส</li>
-      <li>เข้าร่วมการเเข่งขันบาสต้านยาเสพติด</li>
-      <li>เข้าร่วมวิ่งมาราธอน</li>
-    </ul>
+
+    <div class="activity-grid">
+
+      <!-- ตัวอย่าง: การ์ดที่มีรูปภาพประกอบ ใส่ไฟล์รูปไว้ในโฟลเดอร์เดียวกับหน้านี้
+           แล้วเปลี่ยน src="activity-camp.jpg" เป็นชื่อไฟล์รูปของคุณ -->
+      <div class="activity-card">
+        <div class="activity-thumb-wrap">
+          <img src="activity-camp.jpg" alt="เข้าค่ายมหาลัยบูรพา">
+        </div>
+        <div class="activity-body">
+          <span class="check">✓</span>
+          <span class="label">เข้าค่ายมหาลัยบูรพา</span>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-thumb-wrap empty">ยังไม่มีรูปภาพ</div>
+        <div class="activity-body">
+          <span class="check">✓</span>
+          <span class="label">เข้าร่วมการเเข่งขันบาส</span>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-thumb-wrap empty">ยังไม่มีรูปภาพ</div>
+        <div class="activity-body">
+          <span class="check">✓</span>
+          <span class="label">เข้าร่วมการเเข่งขันบาสต้านยาเสพติด</span>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-thumb-wrap empty">ยังไม่มีรูปภาพ</div>
+        <div class="activity-body">
+          <span class="check">✓</span>
+          <span class="label">เข้าร่วมวิ่งมาราธอน</span>
+        </div>
+      </div>
+
+    </div>
   </section>
 
   <div class="back-wrap">
@@ -633,7 +511,7 @@ footer {
 // Reveal animation for content inside the current panel
 function revealPanel(panel) {
   if (!panel) return;
-  const items = panel.querySelectorAll('.section-header, p, .info-box, .edu-card, .feature-list li, .honor-card, .contact-card');
+  const items = panel.querySelectorAll('.section-header, p, .info-box, .edu-card, .activity-card, .honor-card, .contact-card');
   items.forEach((el, i) => {
     el.classList.remove('reveal-item');
     void el.offsetWidth;
